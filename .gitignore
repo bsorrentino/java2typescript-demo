@@ -25,3 +25,7 @@ nbdist/
 .nb-gradle/
 
 .mvn/
+.local/
+.cache/
+/bin/
+.netrc
