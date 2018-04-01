@@ -1,14 +1,50 @@
+
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      Java to Typescript - Playground
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content>
+  
+<ion-split-pane>
+  <!--  our side menu  -->
+  <ion-menu [content]="content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Classes</ion-title>
+        <ion-buttons end>
+            <button ion-button color="danger" outline (click)="generate()">
+                generate
+            </button>
+          </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+        <ion-item-group *ngFor="let package of packages">
+            <ion-item-divider class="package">
+              <ion-row>
+                <ion-col col-8>{{package.name}}</ion-col>
+                <ion-col col-2 class="feature">functional</ion-col>
+                <ion-col col-2 class="feature">export</ion-col>
+              </ion-row>    
+            </ion-item-divider>
+            <ion-item *ngFor="let class of package.types">
+                <ion-checkbox></ion-checkbox>
+                <ion-label>{{class.name}}</ion-label>
+                <ion-toggle class="toggle-functional" [(ngModel)]="class.functional"></ion-toggle>
+                <ion-toggle [(ngModel)]="class.export"></ion-toggle>    
+            </ion-item>
+      </ion-item-group>
+    
+    </ion-content>
+    
+  </ion-menu>
+
+  <!-- the main content -->
+  <ion-nav [root]="root" main #content></ion-nav>
+</ion-split-pane>
+
 </ion-content>

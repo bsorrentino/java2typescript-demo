@@ -1,3 +1,20 @@
 page-home {
 
+    .package {
+
+        color:darkblue;
+        font-weight: bolder;
+        font-size: large;
+    }
+
+    .feature {
+        font-style: italic;
+        font-size: small;
+        text-align: right;
+    }
+
+    .toggle-functional {
+        margin-right: 22px !important;
+        
+    }
 }
