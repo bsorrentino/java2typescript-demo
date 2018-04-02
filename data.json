@@ -1,0 +1,16 @@
+[
+    {
+      "name":"java.util",
+      "types":[
+        {"name":"Iterator"},
+        {"name":"List"},
+        {"name":"Set"},
+        {"name":"Map"},
+        {"name":"Stack"},
+        {"name":"Arrays", "export":true},
+        {"name":"Base64"},
+        {"name":"Collections", "export":true},
+        {"name":"Optional"}
+      ]
+    }
+  ]
