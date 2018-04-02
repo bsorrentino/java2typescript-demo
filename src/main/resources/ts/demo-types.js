@@ -1,10 +1,5 @@
 "use strict";
-//
-// EXPORT DECLARATIONS
-// 
-//
 Object.defineProperty(exports, "__esModule", { value: true });
-/// <reference path="demo.d.ts"/>
 exports.TypescriptConverter = Java.type("org.bsc.java2typescript.TypescriptConverter");
 exports.Optional = Java.type("java.util.Optional");
 exports.String = Java.type("java.lang.String");

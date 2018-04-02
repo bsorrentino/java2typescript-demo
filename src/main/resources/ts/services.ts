@@ -22,7 +22,7 @@ function convert( model:string ):string {
 
   let packages = JSON.parse( model ) as [Pkg];
 
-  print( "packages.length", packages.length);
+  //print( "packages.length", packages.length);
 
   let declaredTypesMap = new HashMap<string,org.bsc.java2typescript.TSType>();
 
@@ -42,7 +42,7 @@ function convert( model:string ):string {
 
     let result = declaredTypesMap.values().stream()
       .map( t => converter.processClass( 0, t, declaredTypesMap) )
-      .collect( Collectors.joining( "\n\n") )
+      .collect<string>( Collectors.joining( "\n\n") )
 
     return result;
 }

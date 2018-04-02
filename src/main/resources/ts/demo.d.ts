@@ -71,7 +71,7 @@ declare namespace Java {
   export function type<T>( t:string):T;
 
   export function from<T>( list:java.util.List<T> ):Array<T> ;
-  
+
 }
 //
 // TYPE ALIASES
@@ -413,7 +413,7 @@ class TSType/* extends java.util.HashMap<any, any>*/ {
 	replace<K,V>( arg0:K, arg1:V ):V;
 	replace<K,V>( arg0:K, arg1:V, arg2:V ):boolean;
 	replaceAll<K,V>( arg0:BiFunc<K, V, V> ):void;
-	setExport( export:boolean ):TSType;
+	setExport( exports:boolean ):TSType;
 	size(  ):int;
 	toString(  ):string;
 	values<V>(  ):java.util.Collection<V>;

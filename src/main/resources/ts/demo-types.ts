@@ -1,6 +1,6 @@
 //
 // EXPORT DECLARATIONS
-// 
+//
 //
 
 /// <reference path="demo.d.ts"/>
@@ -224,9 +224,9 @@ export const Collections: CollectionsStatic = Java.type("java.util.Collections")
 interface TSTypeStatic {
 
 	readonly class:any;
-	from( cl:java.lang.Class<any /*java.lang.Object*/>, alias:string, export:boolean ):org.bsc.java2typescript.TSType;
+	from( cl:java.lang.Class<any /*java.lang.Object*/>, alias:string, exports:boolean ):org.bsc.java2typescript.TSType;
 	from( cl:java.lang.Class<any /*java.lang.Object*/> ):org.bsc.java2typescript.TSType;
-	from( cl:java.lang.Class<any /*java.lang.Object*/>, export:boolean ):org.bsc.java2typescript.TSType;
+	from( cl:java.lang.Class<any /*java.lang.Object*/>, exports:boolean ):org.bsc.java2typescript.TSType;
 	functional( cl:java.lang.Class<any /*java.lang.Object*/>, alias:string ):org.bsc.java2typescript.TSType;
 }
 
@@ -402,5 +402,3 @@ interface ArraysStatic {
 }
 
 export const Arrays: ArraysStatic = Java.type("java.util.Arrays");
-
-
