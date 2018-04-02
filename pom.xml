@@ -4,7 +4,7 @@
 
 	<groupId>org.bsc.processor</groupId>
 	<artifactId>java2ts-demo</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<packaging>war</packaging>
 
 	<name>demo</name>
@@ -49,7 +49,22 @@
       <artifactId>jboss-jaxrs-api_1.1_spec</artifactId>
       <scope>provided</scope>
     </dependency>
-	</dependencies>
+
+
+    <dependency>
+        <groupId>org.bsc</groupId>
+        <artifactId>jvm-npm-core</artifactId>
+        <version>1.1.0</version>
+    </dependency>
+
+    <dependency>
+        <groupId>org.bsc.processor</groupId>
+        <artifactId>java2ts-processor</artifactId>
+        <version>${project.version}</version>
+        <optional>true</optional>
+    </dependency>
+     
+    </dependencies>
 
 	<build>
 		<plugins>
@@ -57,6 +72,36 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
+		   <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <proc>none</proc>
+                </configuration>
+            </plugin>          
+             
+            <plugin>
+                <groupId>org.bsc.maven</groupId>
+                <artifactId>maven-processor-plugin</artifactId>
+                <version>3.3.3</version>
+                <executions>
+                    <execution>
+                        <id>process</id>
+                        <goals>
+                            <goal>process</goal>
+                        </goals>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}</outputDirectory>
+                            <options>
+                                <ts.outfile>demo</ts.outfile>
+                            </options>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+			
 		</plugins>
 	</build>
 

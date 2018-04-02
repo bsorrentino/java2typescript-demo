@@ -3,7 +3,7 @@ import { NavController } from 'ionic-angular';
 
 type Package = {
   name:string;
-  types:Array<{name:string, export?:boolean, functiona?:boolean}>;
+  types:Array<{name:string, export?:boolean, functional?:boolean}>;
 }
 
 @Component({
