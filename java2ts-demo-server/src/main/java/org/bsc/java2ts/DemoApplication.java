@@ -1,12 +1,30 @@
 package org.bsc.java2ts;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import static spark.Spark.*;
 
-@SpringBootApplication
+import javax.script.ScriptException;
+
 public class DemoApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
+
+	    final JavaScript js = JavaScript.create();
+	    
+	    port(8080);
+	    
+	    staticFileLocation("/public");
+	    
+	    post( "/translate", "application/json", ( req, res) -> {
+	        try {
+
+	            return js.invokeFunction("convert", req.body() );
+
+	        } catch (NoSuchMethodException | ScriptException e) {
+	            
+	            res.status(500);
+	            return e.getMessage();
+	        }
+
+	    });
 	}
 }
