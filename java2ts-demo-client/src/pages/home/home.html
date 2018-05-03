@@ -26,15 +26,13 @@
         <ion-item-group *ngFor="let package of packages">
             <ion-item-divider class="package">
               <ion-row>
-                <ion-col col-8>{{package.name}}</ion-col>
-                <ion-col col-2 class="feature">functional</ion-col>
+                <ion-col col-10>{{package.name}}</ion-col>
                 <ion-col col-2 class="feature">export</ion-col>
               </ion-row>    
             </ion-item-divider>
             <ion-item *ngFor="let class of package.types">
                 <ion-checkbox></ion-checkbox>
                 <ion-label>{{class.name}}</ion-label>
-                <ion-toggle class="toggle-functional" [(ngModel)]="class.functional"></ion-toggle>
                 <ion-toggle [(ngModel)]="class.export"></ion-toggle>    
             </ion-item>
       </ion-item-group>
@@ -44,7 +42,8 @@
   </ion-menu>
 
   <!-- the main content -->
-  <ion-nav [root]="root" main #content></ion-nav>
+  <ion-nav [root]="contentArea" main #content>
+  </ion-nav>
 </ion-split-pane>
 
 </ion-content>

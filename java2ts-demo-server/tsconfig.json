@@ -10,7 +10,7 @@
     // "declaration": true,                   /* Generates corresponding '.d.ts' file. */
     // "sourceMap": true,                     /* Generates corresponding '.map' file. */
     // "outFile": "./",                       /* Concatenate and emit output to single file. */
-    // "outDir": "./",                        /* Redirect output structure to the directory. */
+    "outDir": "src/main/resources/ts",              /* Redirect output structure to the directory. */
     // "rootDir": "./",                       /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */
     "removeComments": true,                /* Do not emit comments to output. */
     // "noEmit": true,                        /* Do not emit outputs. */
@@ -34,7 +34,7 @@
 
     /* Module Resolution Options */
     // "moduleResolution": "node",            /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */
-    "baseUrl": "src/main/resources",                       /* Base directory to resolve non-absolute module names. */
+    "baseUrl": "src/main",                       /* Base directory to resolve non-absolute module names. */
     "paths": {
       "ts/*":["ts/*"]
       }                           /* A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */

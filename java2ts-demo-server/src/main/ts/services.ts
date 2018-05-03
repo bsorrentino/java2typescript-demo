@@ -32,7 +32,7 @@ function convert( model:string ):string {
           let clazz = p.name + "." + t.name ;
           //print( "process", clazz );
 
-          let ts = TSType.from( Class.forName(clazz), t. export || false )
+          let ts = TSType.from( Class.forName(clazz), t.export || false )
 
           declaredTypesMap.put( clazz, ts );
       });
