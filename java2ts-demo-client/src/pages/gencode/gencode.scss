@@ -1,3 +1,9 @@
 page-gencode {
 
+    @import 'node_modules/codemirror/theme/material';
+
+    .CodeMirror {
+        font-family: Arial, monospace;
+        font-size: 16px;
+    }
 }

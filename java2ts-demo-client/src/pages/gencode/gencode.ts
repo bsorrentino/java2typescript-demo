@@ -15,8 +15,6 @@ import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 })
 export class GencodePage {
   
-  result = ""
-
   constructor(public navCtrl: NavController, public navParams: NavParams, public events:Events) {
   }
 
@@ -24,7 +22,14 @@ export class GencodePage {
     console.log('ionViewDidLoad GencodePage');
 
     this.events.subscribe( "gencode:complete", ( code )=> {
-      this.result = code;
+      console.log( "set code");
+
+      let c:any = document.getElementById("code");
+
+      console.log( "component", c);
+
+      c._codemirror.setValue(code);
+
     })
   }
 
