@@ -2,6 +2,9 @@ page-gencode {
 
     @import 'node_modules/codemirror/theme/material';
 
+    .s-codemirror__name {
+        color: lightgrey;
+    }
     .CodeMirror {
         font-family: Arial, monospace;
         font-size: 16px;

@@ -24,7 +24,7 @@ export class GencodePage {
     this.events.subscribe( "gencode:complete", ( code )=> {
       console.log( "set code");
 
-      let c:any = document.getElementById("code");
+      let c:any = document.getElementById("code_decl");
 
       console.log( "component", c);
 

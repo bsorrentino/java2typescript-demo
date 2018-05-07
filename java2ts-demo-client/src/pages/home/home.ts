@@ -6,7 +6,7 @@ import { GencodePage } from "../gencode/gencode";
 
 type Package = {
   name:string;
-  types:Array<{name:string, export?:boolean}>;
+  types:Array<{name:string, enabled:boolean, export?:boolean}>;
 }
 
 @Component({
@@ -24,15 +24,15 @@ export class HomePage {
     {
       name:"java.util",
       types:[
-        {name:"Iterator"},
-        {name:"List"},
-        {name:"Set"},
-        {name:"Map"},
-        {name:"Stack"},
-        {name:"Arrays", export:true},
-        {name:"Base64"},
-        {name:"Collections", export:true},
-        {name:"Optional"}, 
+        {name:"Iterator", enabled:true},
+        {name:"List", enabled:true},
+        {name:"Set", enabled:true},
+        {name:"Map", enabled:true},
+        {name:"Stack", enabled:true},
+        {name:"Arrays", enabled:true, export:true},
+        {name:"Base64", enabled:true},
+        {name:"Collections", enabled:true, export:true},
+        {name:"Optional", enabled:true}, 
       ],
     }
   ];

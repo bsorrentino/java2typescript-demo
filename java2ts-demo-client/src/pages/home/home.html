@@ -31,7 +31,7 @@
               </ion-row>    
             </ion-item-divider>
             <ion-item *ngFor="let class of package.types">
-                <ion-checkbox></ion-checkbox>
+                <ion-checkbox [(ngModel)]="class.enabled"></ion-checkbox>
                 <ion-label>{{class.name}}</ion-label>
                 <ion-toggle [(ngModel)]="class.export"></ion-toggle>    
             </ion-item>

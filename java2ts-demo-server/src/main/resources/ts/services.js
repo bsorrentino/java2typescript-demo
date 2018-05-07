@@ -7,7 +7,7 @@ function convert(model) {
     var declaredTypesMap = new collections_1.HashMap();
     packages
         .forEach(function (p) {
-        p.types.forEach(function (t) {
+        p.types.filter(function (t) { return t.enabled; }).forEach(function (t) {
             var clazz = p.name + "." + t.name;
             var ts = demo_types_1.TSType.from(demo_types_1.Class.forName(clazz), t.export || false);
             declaredTypesMap.put(clazz, ts);
@@ -17,5 +17,6 @@ function convert(model) {
     var result = declaredTypesMap.values().stream()
         .map(function (t) { return converter.processClass(0, t, declaredTypesMap); })
         .collect(demo_types_1.Collectors.joining("\n\n"));
-    return result;
+    var sb = demo_types_1.TypescriptConverter.loadDefaultDefinition(demo_types_1.Optional.empty());
+    return sb.append(result).toString();
 }

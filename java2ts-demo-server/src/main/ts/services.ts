@@ -1,5 +1,6 @@
 
 import {
+  Optional,
   TypescriptConverter,
   Class,
   Collectors,
@@ -11,7 +12,7 @@ import {
 import { HashMap } from "ts/collections";
 
 
-type Type = {name:string, export?:boolean, functiona?:boolean}
+type Type = {name:string, export?:boolean, enabled:boolean}
 
 type Pkg = {
   name:string;
@@ -28,7 +29,7 @@ function convert( model:string ):string {
 
   packages
     .forEach( p => {
-      p.types.forEach( t => {
+      p.types.filter( t => t.enabled ).forEach( t => {
           let clazz = p.name + "." + t.name ;
           //print( "process", clazz );
 
@@ -44,5 +45,7 @@ function convert( model:string ):string {
       .map( t => converter.processClass( 0, t, declaredTypesMap) )
       .collect<string>( Collectors.joining( "\n\n") )
 
-    return result;
+    let sb = TypescriptConverter.loadDefaultDefinition( Optional.empty() );
+
+    return sb.append(result).toString();
 }
