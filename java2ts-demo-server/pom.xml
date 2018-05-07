@@ -49,8 +49,16 @@
 		   </dependency>
 
     </dependencies>
+	<repositories>
+		<repository>
+				<id>sonatype-server</id>
+				<name>sonatype-snapshots</name>
+				<url>http://oss.sonatype.org/content/repositories/snapshots</url>
+		</repository>
+	</repositories>
 
 	<build>
+		<finalName>java2ts-demo</finalName>
 		<plugins>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
