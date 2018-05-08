@@ -28,6 +28,7 @@
     "@ionic/storage": "2.1.3",
     "codemirror": "^5.37.0",
     "coffeekraken-s-codemirror-component": "^1.0.1",
+    "hoek": "^5.0.3",
     "ionic-angular": "3.9.2",
     "ionicons": "3.0.0",
     "monaco-editor": "^0.11.1",
