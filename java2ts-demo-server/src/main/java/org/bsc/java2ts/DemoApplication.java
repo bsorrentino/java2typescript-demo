@@ -8,12 +8,14 @@ public class DemoApplication {
 
 	public static void main(String[] args) {
 
+			final String port =  System.getProperty( "port", "8080");
+
+			port( Integer.parseInt(port));
+
 	    final JavaScript js = JavaScript.create();
 
-	    port(8080);
-
-	    //staticFileLocation("/public");
-			externalStaticFileLocation("../java2ts-demo-client/www");
+	    staticFileLocation("/public");
+			//externalStaticFileLocation("../java2ts-demo-client/www");
 
 	    post( "/translate", "application/json", ( req, res) -> {
 	        try {
