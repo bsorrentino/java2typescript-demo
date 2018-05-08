@@ -8,6 +8,4 @@ COPY java2ts-demo-1.0.0-SNAPSHOT.jar /home
 
 WORKDIR /home
 
-ENV PORT $PORT
-
 CMD java -Dport=$PORT -jar java2ts-demo-1.0.0-SNAPSHOT.jar

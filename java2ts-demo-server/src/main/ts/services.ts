@@ -23,7 +23,12 @@ function convert( model:string ):string {
 
   let packages = JSON.parse( model ) as [Pkg];
 
-  //print( "packages.length", packages.length);
+  let res = _convert( packages );
+
+  return JSON.stringify( res );
+}
+
+function _convert( packages:[Pkg] ):[string,string] {
 
   let declaredTypesMap = new HashMap<string,org.bsc.java2typescript.TSType>();
 
@@ -41,11 +46,21 @@ function convert( model:string ):string {
 
     let converter = new TypescriptConverter();
 
-    let result = declaredTypesMap.values().stream()
+    let decl = declaredTypesMap.values().stream()
       .map( t => converter.processClass( 0, t, declaredTypesMap) )
       .collect<string>( Collectors.joining( "\n\n") )
 
-    let sb = TypescriptConverter.loadDefaultDefinition( Optional.empty() );
+    let sb0 = TypescriptConverter.loadDefaultDeclarations( Optional.empty() );
 
-    return sb.append(result).toString();
+    sb0.append(decl);
+
+    let defn = declaredTypesMap.values().stream()
+      .filter( t => t.isExport())
+      .map( t => converter.processStatic( t, declaredTypesMap) )
+      .collect<string>( Collectors.joining( "\n\n") )
+
+    let sb1 = TypescriptConverter.loadDefaultDefinition( Optional.empty() );
+    sb1.append(defn);
+
+    return [ sb0.toString(), sb1.toString() ];
 }

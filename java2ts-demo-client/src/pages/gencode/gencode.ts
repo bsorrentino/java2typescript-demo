@@ -15,22 +15,33 @@ import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 })
 export class GencodePage {
   
+  hideDeclarations = false;
+  hideDefinitions = false;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public events:Events) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad GencodePage');
 
-    this.events.subscribe( "gencode:complete", ( code )=> {
+    this.events.subscribe( "gencode:complete", ( [decl, defn] )=> {
       console.log( "set code");
 
-      let c:any = document.getElementById("code_decl");
+      let odecl:any = document.getElementById("code_decl");
+      let odefn:any = document.getElementById("code_defn");
 
-      console.log( "component", c);
-
-      c._codemirror.setValue(code);
+      odecl._codemirror.setValue(decl);
+      odefn._codemirror.setValue(defn);
 
     })
   }
 
+  toggleDeclarations() {
+    this.hideDeclarations = !this.hideDeclarations;
+  }
+
+  toggleDefinitions() {
+    this.hideDefinitions = !this.hideDefinitions;
+  }
+  
 }

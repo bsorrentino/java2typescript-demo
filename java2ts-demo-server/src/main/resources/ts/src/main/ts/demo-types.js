@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Optional = Java.type("java.util.Optional");
+exports.Class = Java.type("java.lang.Class");
+exports.Collectors = Java.type("java.util.stream.Collectors");
+exports.TypescriptConverter = Java.type("org.bsc.java2typescript.TypescriptConverter");
+exports.Iterable = Java.type("java.lang.Iterable");
+exports.Stream = Java.type("java.util.stream.Stream");
+exports.TSType = Java.type("org.bsc.java2typescript.TSType");
+exports.Iterator = Java.type("java.util.Iterator");
+exports.String = Java.type("java.lang.String");
+exports.Arrays = Java.type("java.util.Arrays");
+exports.Collections = Java.type("java.util.Collections");

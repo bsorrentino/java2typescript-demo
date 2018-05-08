@@ -19,6 +19,7 @@ public class DemoApplication {
 
 	    post( "/translate", "application/json", ( req, res) -> {
 	        try {
+							res.type("application/json");
 
 	            return js.invokeFunction("convert", req.body() );
 

@@ -9,4 +9,19 @@ page-gencode {
         font-family: Arial, monospace;
         font-size: 16px;
     }
+
+    
+     .item-accordion {
+        //line-height: 38px;
+        padding-top: 0;
+        padding-bottom: 0;
+        transition: 0.09s all linear;
+      }
+      .item-accordion.hide {
+        line-height: 0px;
+      }
+      .item-accordion.hide-add,
+      .item-accordion.hide-remove {
+        display: block !important;
+      }
 }

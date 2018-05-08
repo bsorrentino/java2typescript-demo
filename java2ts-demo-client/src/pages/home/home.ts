@@ -53,7 +53,7 @@ export class HomePage {
     this.result = "";
     this.http.post( "/translate", this.packages )
       .subscribe( 
-        res => this.events.publish( "gencode:complete", res.text()),
+        res => this.events.publish( "gencode:complete", res.json()),
         err => console.log( err )
       )
   }

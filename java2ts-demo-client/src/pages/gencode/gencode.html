@@ -14,17 +14,39 @@
 
 
 <ion-content padding>
-    <s-codemirror title="Declarations" id="code_decl" language="{name: 'javascript', typescript: true}" line-numbers="true" theme="material">
-      <![CDATA[
+    <ion-card>
+        <ion-row>
+          <ion-col col-1>
+              <button ion-button clear (click)="toggleDeclarations()" >
+                  <ion-icon name="arrow-dropdown"></ion-icon>
+                </button>  
+          </ion-col>
+            <ion-col align-self-center>
+              <h1>Declarations</h1>
+            </ion-col>
+          </ion-row>
+    <ion-card-content class="{{hideDeclarations ? 'item-accordion hide' : 'item-accordion' }}">
+        <s-codemirror title="declarations.d.ts" id="code_decl" language="{name: 'javascript', typescript: true}" line-numbers="true" theme="material"></s-codemirror>      
+    </ion-card-content> 
+    </ion-card>
 
-      class A {
-
-      }
-
-      type L = A;
-      ]]>
-   </s-codemirror>
-  <!--
+    <ion-card>
+        <ion-row>
+            <ion-col col-1>
+                <button ion-button clear (click)="toggleDefinitions()" >
+                    <ion-icon name="arrow-dropdown"></ion-icon>
+                  </button>  
+            </ion-col>
+              <ion-col align-self-center>
+                <h1>Definitions</h1>
+              </ion-col>
+            </ion-row>
+      <ion-card-content class="{{hideDefinitions ? 'item-accordion hide' : 'item-accordion' }}">
+        
+      <s-codemirror title="definitions.ts" id="code_defn" language="{name: 'javascript', typescript: true}" line-numbers="true" theme="material"></s-codemirror>
+      </ion-card-content>
+      </ion-card>
+<!--
     <blockquote>
     <pre>
           {{result}}
