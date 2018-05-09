@@ -1,34 +1,51 @@
 package org.bsc.java2ts;
 
-import static spark.Spark.*;
+import static spark.Spark.externalStaticFileLocation;
+import static spark.Spark.port;
+import static spark.Spark.post;
+import static spark.Spark.staticFileLocation;
 
 import javax.script.ScriptException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+
+mvn package exec:java -DDevelop=true -Dorg.slf4j.simpleLogger.defaultLogLevel=debug
+ */
 public class DemoApplication {
+    final static Logger logger = LoggerFactory.getLogger(DemoApplication.class);
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 
-			final String port =  System.getProperty( "port", "8080");
+        final String port = System.getProperty("port", "8080");
 
-			port( Integer.parseInt(port));
+        port(Integer.parseInt(port));
 
-	    final JavaScript js = JavaScript.create();
+        final JavaScript js = JavaScript.create();
 
-	    staticFileLocation("/public");
-			//externalStaticFileLocation("../java2ts-demo-client/www");
+        if (Boolean.getBoolean("Develop")) {
 
-	    post( "/translate", "application/json", ( req, res) -> {
-	        try {
-							res.type("application/json");
+            logger.debug("Develop mode on");
+            externalStaticFileLocation("../java2ts-demo-client/www");
+        } else {
+            logger.debug("Production mode on");
+            staticFileLocation("/public");
+        }
 
-	            return js.invokeFunction("convert", req.body() );
+        post("/translate", "application/json", (req, res) -> {
+            try {
+                res.type("application/json");
 
-	        } catch (NoSuchMethodException | ScriptException e) {
+                return js.invokeFunction("convert", req.body());
 
-	            res.status(500);
-	            return e.getMessage();
-	        }
+            } catch (NoSuchMethodException | ScriptException e) {
 
-	    });
-	}
+                res.status(500);
+                return e.getMessage();
+            }
+
+        });
+    }
 }

@@ -15,7 +15,10 @@ type bytearray = [char];
 
 declare namespace java.lang {
 
-	interface Class<T> {}
+	interface Class<T> {
+		getName():string;
+		getSimpleName():string;
+	}
 	interface AutoCloseable {}
 	interface Cloneable {}
 
@@ -47,7 +50,7 @@ declare namespace Java {
   export function type<T>( t:string):T;
 
   export function from<T>( list:java.util.List<T> ):Array<T> ;
-  
+
 }
 interface BiConsumer<T, U>/*java.util.function.BiConsumer*/ {
 
