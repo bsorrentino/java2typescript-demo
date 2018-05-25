@@ -13,9 +13,9 @@ function _convert(packages) {
         .forEach(function (p) {
         p.types.filter(function (t) { return t.enabled; }).forEach(function (t) {
             var clazz = demo_types_1.Class.forName(p.name + "." + t.name);
-            var ts = (t.alias) ?
-                demo_types_1.TSType.from(clazz, t.alias, t.export || false) :
-                demo_types_1.TSType.from(clazz, t.export || false);
+            var ts = demo_types_1.TSType.from(clazz).setExport(t.export || false);
+            if (t.alias)
+                ts.setAlias(t.alias);
             declaredTypesMap.put(clazz.getName(), ts);
         });
     });

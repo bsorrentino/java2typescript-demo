@@ -38,11 +38,9 @@ function _convert( packages:[Pkg] ):[string,string] {
           let clazz = Class.forName(p.name + "." + t.name) ;
           //print( "process", clazz );
 
-          let ts = (t.alias) ?
-            TSType.from( clazz, t.alias as string, t.export || false ) :
-            TSType.from( clazz, t.export || false )
-            ;
+          let ts = TSType.from( clazz ).setExport(t.export || false);
 
+          if( t.alias ) ts.setAlias(t.alias as string);
 
           declaredTypesMap.put( clazz.getName(), ts );
       });
