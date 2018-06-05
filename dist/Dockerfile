@@ -4,8 +4,8 @@ FROM openjdk:8-jdk
 #EXPOSE 8080
 
 
-COPY java2ts-demo-1.0.0-SNAPSHOT.jar /home
+COPY java2ts-demo-1.0.0.jar /home
 
 WORKDIR /home
 
-CMD java -Dport=$PORT -jar java2ts-demo-1.0.0-SNAPSHOT.jar
+CMD java -Dport=$PORT -jar java2ts-demo-1.0.0.jar
