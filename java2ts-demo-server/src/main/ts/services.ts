@@ -12,7 +12,7 @@ import {
 import { HashMap } from "ts/collections";
 
 
-type Type = {name:string, export?:boolean, enabled:boolean}
+type Type = {name:string, export?:boolean, enabled:boolean, alias?:string}
 
 type Pkg = {
   name:string;
@@ -35,12 +35,14 @@ function _convert( packages:[Pkg] ):[string,string] {
   packages
     .forEach( p => {
       p.types.filter( t => t.enabled ).forEach( t => {
-          let clazz = p.name + "." + t.name ;
+          let clazz = Class.forName(p.name + "." + t.name) ;
           //print( "process", clazz );
 
-          let ts = TSType.from( Class.forName(clazz), t.export || false )
+          let ts = TSType.from( clazz ).setExport(t.export || false);
 
-          declaredTypesMap.put( clazz, ts );
+          if( t.alias ) ts.setAlias(t.alias as string);
+
+          declaredTypesMap.put( clazz.getName(), ts );
       });
     });
 

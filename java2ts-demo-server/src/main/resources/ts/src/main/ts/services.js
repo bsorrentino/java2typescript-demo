@@ -12,9 +12,11 @@ function _convert(packages) {
     packages
         .forEach(function (p) {
         p.types.filter(function (t) { return t.enabled; }).forEach(function (t) {
-            var clazz = p.name + "." + t.name;
-            var ts = demo_types_1.TSType.from(demo_types_1.Class.forName(clazz), t.export || false);
-            declaredTypesMap.put(clazz, ts);
+            var clazz = demo_types_1.Class.forName(p.name + "." + t.name);
+            var ts = demo_types_1.TSType.from(clazz).setExport(t.export || false);
+            if (t.alias)
+                ts.setAlias(t.alias);
+            declaredTypesMap.put(clazz.getName(), ts);
         });
     });
     var converter = new demo_types_1.TypescriptConverter();

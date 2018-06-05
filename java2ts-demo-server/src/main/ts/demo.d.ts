@@ -1,7 +1,11 @@
-//
-// JAVA TYPESCRIPT DEDINITION
-//
-
+/*
+ * Project: java2typescript - https://github.com/bsorrentino/java2typescript
+ *
+ * Author: bsorrentino 
+ *
+ * TYPESCRIPT DEFINITIONS
+ *
+ */
 
 type int    = number;
 type long   = number;
@@ -49,30 +53,112 @@ declare namespace Java {
   export function from<T>( list:java.util.List<T> ):Array<T> ;
   
 }
+declare namespace java.util.stream {
+
+interface Stream<T>/* extends BaseStream<T, any>*/ {
+
+	allMatch( arg0:Predicate<T> ):boolean;
+	anyMatch( arg0:Predicate<T> ):boolean;
+	close(  ):void;
+	collect<R>( arg0:Supplier<R>, arg1:BiConsumer<R, T>, arg2:BiConsumer<R, R> ):R;
+	collect<R>( arg0:any /*java.util.stream.Collector*/ ):R;
+	count(  ):long;
+	distinct(  ):Stream<T>;
+	filter( arg0:Predicate<T> ):Stream<T>;
+	findAny(  ):java.util.Optional<T>;
+	findFirst(  ):java.util.Optional<T>;
+	flatMap<R>( arg0:Func<T, Stream<R>> ):Stream<R>;
+	flatMapToDouble( arg0:Func<T, any /*java.util.stream.DoubleStream*/> ):any /*java.util.stream.DoubleStream*/;
+	flatMapToInt( arg0:Func<T, any /*java.util.stream.IntStream*/> ):any /*java.util.stream.IntStream*/;
+	flatMapToLong( arg0:Func<T, any /*java.util.stream.LongStream*/> ):any /*java.util.stream.LongStream*/;
+	forEach( arg0:Consumer<T> ):void;
+	forEachOrdered( arg0:Consumer<T> ):void;
+	isParallel(  ):boolean;
+	iterator(  ):java.util.Iterator<T>;
+	limit( arg0:long ):Stream<T>;
+	map<R>( arg0:Func<T, R> ):Stream<R>;
+	mapToDouble( arg0:any /*java.util.function.ToDoubleFunction*/ ):any /*java.util.stream.DoubleStream*/;
+	mapToInt( arg0:any /*java.util.function.ToIntFunction*/ ):any /*java.util.stream.IntStream*/;
+	mapToLong( arg0:any /*java.util.function.ToLongFunction*/ ):any /*java.util.stream.LongStream*/;
+	max( arg0:any /*java.util.Comparator*/ ):java.util.Optional<T>;
+	min( arg0:any /*java.util.Comparator*/ ):java.util.Optional<T>;
+	noneMatch( arg0:Predicate<T> ):boolean;
+	onClose<S>( arg0:java.lang.Runnable ):S;
+	parallel<S>(  ):S;
+	peek( arg0:Consumer<T> ):Stream<T>;
+	reduce( arg0:BinaryOperator<T> ):java.util.Optional<T>;
+	reduce( arg0:T, arg1:BinaryOperator<T> ):T;
+	reduce<U>( arg0:U, arg1:BiFunction<U, T, U>, arg2:BinaryOperator<U> ):U;
+	sequential<S>(  ):S;
+	skip( arg0:long ):Stream<T>;
+	sorted(  ):Stream<T>;
+	sorted( arg0:any /*java.util.Comparator*/ ):Stream<T>;
+	spliterator(  ):any /*java.util.Spliterator*/;
+	toArray(  ):[any /*java.lang.Object*/];
+	toArray<A>( arg0:any /*java.util.function.IntFunction*/ ):[A];
+	unordered<S>(  ):S;
+
+} // end Stream
+
+} // end namespace java.util.stream
+declare namespace java.lang {
+
+interface Comparable<T> {
+
+	compareTo( arg0:T ):int;
+
+} // end Comparable
+
+} // end namespace java.lang
+declare namespace java.util.stream {
+
+class Collectors/* extends java.lang.Object*/ {
+
+	equals( arg0:any /*java.lang.Object*/ ):boolean;
+	toString(  ):string;
+
+} // end Collectors
+
+} // end namespace java.util.stream
+declare namespace java.util {
+
+class Arrays/* extends java.lang.Object*/ {
+
+	equals( arg0:any /*java.lang.Object*/ ):boolean;
+	toString(  ):string;
+
+} // end Arrays
+
+} // end namespace java.util
+declare namespace java.util {
+
+interface Iterator<E> {
+
+	forEachRemaining( arg0:Consumer<E> ):void;
+	hasNext(  ):boolean;
+	next(  ):E;
+	remove(  ):void;
+
+} // end Iterator
+
+} // end namespace java.util
+interface Supplier<T>/*java.util.function.Supplier*/ {
+
+	(  ):T;
+
+} // end Supplier
 interface BiConsumer<T, U>/*java.util.function.BiConsumer*/ {
 
 	( arg0:T, arg1:U ):void;
 	andThen?( arg0:BiConsumer<T, U> ):BiConsumer<T, U>;
 
 } // end BiConsumer
-interface Predicate<T>/*java.util.function.Predicate*/ {
+interface Consumer<T>/*java.util.function.Consumer*/ {
 
-	( arg0:T ):boolean;
-	// static isEqual<T>( arg0:any /*java.lang.Object*/ ):Predicate<T>;
-	and?( arg0:Predicate<T> ):Predicate<T>;
-	negate?(  ):Predicate<T>;
-	or?( arg0:Predicate<T> ):Predicate<T>;
+	( arg0:T ):void;
+	andThen?( arg0:Consumer<T> ):Consumer<T>;
 
-} // end Predicate
-declare namespace java.lang {
-
-interface Comparable<T> {
-
-	( arg0:T ):int;
-
-} // end Comparable
-
-} // end namespace java.lang
+} // end Consumer
 declare namespace java.util {
 
 interface Map<K, V> {
@@ -105,6 +191,14 @@ interface Map<K, V> {
 } // end Map
 
 } // end namespace java.util
+interface BiPredicate<T, U>/*java.util.function.BiPredicate*/ {
+
+	( arg0:T, arg1:U ):boolean;
+	and?( arg0:BiPredicate<T, U> ):BiPredicate<T, U>;
+	negate?(  ):BiPredicate<T, U>;
+	or?( arg0:BiPredicate<T, U> ):BiPredicate<T, U>;
+
+} // end BiPredicate
 interface Func<T, R>/*java.util.function.Function*/ {
 
 	( arg0:T ):R;
@@ -113,14 +207,6 @@ interface Func<T, R>/*java.util.function.Function*/ {
 	compose?<V>( arg0:Func<V, T> ):Func<V, R>;
 
 } // end Func
-interface BinaryOperator<T>/*java.util.function.BinaryOperator extends BiFunction<T, any, any>*/ {
-
-	<R,U>( arg0:T, arg1:U ):R;
-	// static maxBy<T>( arg0:any /*java.util.Comparator*/ ):BinaryOperator<T>;
-	// static minBy<T>( arg0:any /*java.util.Comparator*/ ):BinaryOperator<T>;
-	andThen?<R,U,V>( arg0:Func<R, V> ):BiFunction<T, U, V>;
-
-} // end BinaryOperator
 declare namespace java.util {
 
 interface Set<E>/* extends Collection<E>*/ {
@@ -150,78 +236,6 @@ interface Set<E>/* extends Collection<E>*/ {
 } // end namespace java.util
 declare namespace java.util {
 
-class Optional<T>/* extends java.lang.Object*/ {
-
-	equals( arg0:any /*java.lang.Object*/ ):boolean;
-	filter( arg0:Predicate<T> ):Optional<T>;
-	flatMap<U>( arg0:Func<T, Optional<U>> ):Optional<U>;
-	get(  ):T;
-	ifPresent( arg0:Consumer<T> ):void;
-	isPresent(  ):boolean;
-	map<U>( arg0:Func<T, U> ):Optional<U>;
-	orElse( arg0:T ):T;
-	orElseGet( arg0:Supplier<T> ):T;
-	orElseThrow<X>( arg0:Supplier<X> ):T;
-	toString(  ):string;
-
-} // end Optional
-
-} // end namespace java.util
-interface Supplier<T>/*java.util.function.Supplier*/ {
-
-	(  ):T;
-
-} // end Supplier
-declare namespace java.util.stream {
-
-class Collectors/* extends java.lang.Object*/ {
-
-	equals( arg0:any /*java.lang.Object*/ ):boolean;
-	toString(  ):string;
-
-} // end Collectors
-
-} // end namespace java.util.stream
-interface Runnable/*java.lang.Runnable*/ {
-
-	(  ):void;
-
-} // end Runnable
-declare namespace org.bsc.java2typescript {
-
-class TypescriptConverter/* extends java.lang.Object*/ {
-
-	equals( arg0:any /*java.lang.Object*/ ):boolean;
-	getClassDecl( type:TSType, declaredTypeMap:java.util.Map<string, TSType> ):string;
-	getMethodParametersAndReturnDecl<E>( m:E, type:TSType, declaredTypeMap:java.util.Map<string, TSType>, packageResolution:boolean ):string;
-	processClass( level:int, tstype:TSType, declaredTypeMap:java.util.Map<string, TSType> ):string;
-	processStatic( type:TSType, declaredTypeMap:java.util.Map<string, TSType> ):string;
-	toString(  ):string;
-
-} // end TypescriptConverter
-
-} // end namespace org.bsc.java2typescript
-declare namespace java.lang {
-
-interface Iterable<T> {
-
-	(  ):java.util.Iterator<T>;
-	forEach?( arg0:Consumer<T> ):void;
-	spliterator?(  ):any /*java.util.Spliterator*/;
-
-} // end Iterable
-
-} // end namespace java.lang
-interface BiPredicate<T, U>/*java.util.function.BiPredicate*/ {
-
-	( arg0:T, arg1:U ):boolean;
-	and?( arg0:BiPredicate<T, U> ):BiPredicate<T, U>;
-	negate?(  ):BiPredicate<T, U>;
-	or?( arg0:BiPredicate<T, U> ):BiPredicate<T, U>;
-
-} // end BiPredicate
-declare namespace java.util {
-
 interface Collection<E>/* extends java.lang.Iterable<E>*/ {
 
 	add( arg0:E ):boolean;
@@ -247,54 +261,49 @@ interface Collection<E>/* extends java.lang.Iterable<E>*/ {
 } // end Collection
 
 } // end namespace java.util
-declare namespace java.util.stream {
+declare namespace java.lang {
 
-interface Stream<T>/* extends BaseStream<T, any>*/ {
+interface Runnable {
 
-	allMatch( arg0:Predicate<T> ):boolean;
-	anyMatch( arg0:Predicate<T> ):boolean;
-	close(  ):void;
-	collect<R>( arg0:Supplier<R>, arg1:BiConsumer<R, T>, arg2:BiConsumer<R, R> ):R;
-	collect<R>( arg0:any /*java.util.stream.Collector*/ ):R;
-	count(  ):long;
-	distinct(  ):Stream<T>;
-	filter( arg0:Predicate<T> ):Stream<T>;
-	findAny(  ):java.util.Optional<T>;
-	findFirst(  ):java.util.Optional<T>;
-	flatMap<R>( arg0:Func<T, Stream<R>> ):Stream<R>;
-	flatMapToDouble( arg0:Func<T, any /*java.util.stream.DoubleStream*/> ):any /*java.util.stream.DoubleStream*/;
-	flatMapToInt( arg0:Func<T, any /*java.util.stream.IntStream*/> ):any /*java.util.stream.IntStream*/;
-	flatMapToLong( arg0:Func<T, any /*java.util.stream.LongStream*/> ):any /*java.util.stream.LongStream*/;
-	forEach( arg0:Consumer<T> ):void;
-	forEachOrdered( arg0:Consumer<T> ):void;
-	isParallel(  ):boolean;
-	iterator(  ):java.util.Iterator<T>;
-	limit( arg0:long ):Stream<T>;
-	map<R>( arg0:Func<T, R> ):Stream<R>;
-	mapToDouble( arg0:any /*java.util.function.ToDoubleFunction*/ ):any /*java.util.stream.DoubleStream*/;
-	mapToInt( arg0:any /*java.util.function.ToIntFunction*/ ):any /*java.util.stream.IntStream*/;
-	mapToLong( arg0:any /*java.util.function.ToLongFunction*/ ):any /*java.util.stream.LongStream*/;
-	max( arg0:any /*java.util.Comparator*/ ):java.util.Optional<T>;
-	min( arg0:any /*java.util.Comparator*/ ):java.util.Optional<T>;
-	noneMatch( arg0:Predicate<T> ):boolean;
-	onClose<S>( arg0:Runnable ):S;
-	parallel<S>(  ):S;
-	peek( arg0:Consumer<T> ):Stream<T>;
-	reduce( arg0:BinaryOperator<T> ):java.util.Optional<T>;
-	reduce( arg0:T, arg1:BinaryOperator<T> ):T;
-	reduce<U>( arg0:U, arg1:BiFunction<U, T, U>, arg2:BinaryOperator<U> ):U;
-	sequential<S>(  ):S;
-	skip( arg0:long ):Stream<T>;
-	sorted(  ):Stream<T>;
-	sorted( arg0:any /*java.util.Comparator*/ ):Stream<T>;
-	spliterator(  ):any /*java.util.Spliterator*/;
-	toArray(  ):[any /*java.lang.Object*/];
-	toArray<A>( arg0:any /*java.util.function.IntFunction*/ ):[A];
-	unordered<S>(  ):S;
+	(  ):void;
 
-} // end Stream
+} // end Runnable
 
-} // end namespace java.util.stream
+} // end namespace java.lang
+interface Predicate<T>/*java.util.function.Predicate*/ {
+
+	( arg0:T ):boolean;
+	// static isEqual<T>( arg0:any /*java.lang.Object*/ ):Predicate<T>;
+	and?( arg0:Predicate<T> ):Predicate<T>;
+	negate?(  ):Predicate<T>;
+	or?( arg0:Predicate<T> ):Predicate<T>;
+
+} // end Predicate
+interface BiFunction<T, U, R>/*java.util.function.BiFunction*/ {
+
+	( arg0:T, arg1:U ):R;
+	andThen?<V>( arg0:Func<R, V> ):BiFunction<T, U, V>;
+
+} // end BiFunction
+declare namespace java.util {
+
+class Optional<T>/* extends java.lang.Object*/ {
+
+	equals( arg0:any /*java.lang.Object*/ ):boolean;
+	filter( arg0:Predicate<T> ):Optional<T>;
+	flatMap<U>( arg0:Func<T, Optional<U>> ):Optional<U>;
+	get(  ):T;
+	ifPresent( arg0:Consumer<T> ):void;
+	isPresent(  ):boolean;
+	map<U>( arg0:Func<T, U> ):Optional<U>;
+	orElse( arg0:T ):T;
+	orElseGet( arg0:Supplier<T> ):T;
+	orElseThrow<X>( arg0:Supplier<X> ):T;
+	toString(  ):string;
+
+} // end Optional
+
+} // end namespace java.util
 declare namespace java.util {
 
 interface List<E>/* extends Collection<E>*/ {
@@ -334,6 +343,16 @@ interface List<E>/* extends Collection<E>*/ {
 } // end List
 
 } // end namespace java.util
+declare namespace java.util {
+
+class Collections/* extends java.lang.Object*/ {
+
+	equals( arg0:any /*java.lang.Object*/ ):boolean;
+	toString(  ):string;
+
+} // end Collections
+
+} // end namespace java.util
 declare namespace org.bsc.java2typescript {
 
 class TSType/* extends java.util.HashMap<any, any>*/ {
@@ -360,7 +379,7 @@ class TSType/* extends java.util.HashMap<any, any>*/ {
 	hasAlias(  ):boolean;
 	isEmpty(  ):boolean;
 	isExport(  ):boolean;
-	isFunctionalInterface(  ):boolean;
+	isFunctional(  ):boolean;
 	keySet<K>(  ):java.util.Set<K>;
 	merge<K,V>( arg0:K, arg1:V, arg2:BiFunction<V, V, V> ):V;
 	put<K,V>( arg0:K, arg1:V ):V;
@@ -371,7 +390,9 @@ class TSType/* extends java.util.HashMap<any, any>*/ {
 	replace<K,V>( arg0:K, arg1:V ):V;
 	replace<K,V>( arg0:K, arg1:V, arg2:V ):boolean;
 	replaceAll<K,V>( arg0:BiFunction<K, V, V> ):void;
-	setExport( exports:boolean ):TSType;
+	setAlias( value:string ):TSType;
+	setExport( value:boolean ):TSType;
+	setFunctional( value:boolean ):TSType;
 	size(  ):int;
 	supportNamespace(  ):boolean;
 	toString(  ):string;
@@ -380,24 +401,28 @@ class TSType/* extends java.util.HashMap<any, any>*/ {
 } // end TSType
 
 } // end namespace org.bsc.java2typescript
-interface BiFunction<T, U, R>/*java.util.function.BiFunction*/ {
+interface BinaryOperator<T>/*java.util.function.BinaryOperator extends BiFunction<T, any, any>*/ {
 
-	( arg0:T, arg1:U ):R;
-	andThen?<V>( arg0:Func<R, V> ):BiFunction<T, U, V>;
+	<R,U>( arg0:T, arg1:U ):R;
+	// static maxBy<T>( arg0:any /*java.util.Comparator*/ ):BinaryOperator<T>;
+	// static minBy<T>( arg0:any /*java.util.Comparator*/ ):BinaryOperator<T>;
+	andThen?<R,U,V>( arg0:Func<R, V> ):BiFunction<T, U, V>;
 
-} // end BiFunction
-declare namespace java.util {
+} // end BinaryOperator
+declare namespace org.bsc.java2typescript {
 
-interface Iterator<E> {
+class TypescriptConverter/* extends java.lang.Object*/ {
 
-	forEachRemaining( arg0:Consumer<E> ):void;
-	hasNext(  ):boolean;
-	next(  ):E;
-	remove(  ):void;
+	contextOf( tstype:TSType, declaredTypeMap:java.util.Map<string, TSType> ):any /*org.bsc.java2typescript.TypescriptConverter$Context*/;
+	equals( arg0:any /*java.lang.Object*/ ):boolean;
+	getMethodParametersAndReturnDecl<E>( m:E, type:TSType, declaredTypeMap:java.util.Map<string, TSType>, packageResolution:boolean ):string;
+	processClass( level:int, tstype:TSType, declaredTypeMap:java.util.Map<string, TSType> ):string;
+	processStatic( type:TSType, declaredTypeMap:java.util.Map<string, TSType> ):string;
+	toString(  ):string;
 
-} // end Iterator
+} // end TypescriptConverter
 
-} // end namespace java.util
+} // end namespace org.bsc.java2typescript
 interface UnaryOperator<T>/*java.util.function.UnaryOperator extends Function<T, any>*/ {
 
 	<R>( arg0:T ):R;
@@ -467,29 +492,14 @@ class String/* extends Object implements java.io.Serializable, Comparable<any>, 
 } // end String
 
 } // end namespace java.lang
-declare namespace java.util {
+declare namespace java.lang {
 
-class Arrays/* extends java.lang.Object*/ {
+interface Iterable<T> {
 
-	equals( arg0:any /*java.lang.Object*/ ):boolean;
-	toString(  ):string;
+	(  ):java.util.Iterator<T>;
+	forEach?( arg0:Consumer<T> ):void;
+	spliterator?(  ):any /*java.util.Spliterator*/;
 
-} // end Arrays
+} // end Iterable
 
-} // end namespace java.util
-interface Consumer<T>/*java.util.function.Consumer*/ {
-
-	( arg0:T ):void;
-	andThen?( arg0:Consumer<T> ):Consumer<T>;
-
-} // end Consumer
-declare namespace java.util {
-
-class Collections/* extends java.lang.Object*/ {
-
-	equals( arg0:any /*java.lang.Object*/ ):boolean;
-	toString(  ):string;
-
-} // end Collections
-
-} // end namespace java.util
+} // end namespace java.lang
